@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Thi: Lớp 6 - Bài 1: Chào hỏi & Làm quen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- React & ReactDOM (React 18) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel Standalone -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      body { font-family: 'Quicksand', sans-serif; }
+      .animate-bounce-slow { animation: bounce 3s infinite; }
+      @keyframes bounce { 0%, 100% { transform: translateY(-5%); } 50% { transform: translateY(0); } }
+      .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+      #error-display { display: none; padding: 20px; background: #fee2e2; color: #991b1b; border: 2px solid #f87171; margin: 20px; border-radius: 8px; font-weight: bold; }
+    </style>
+</head>
+<body class="bg-slate-50 bg-[radial-gradient(at_top_left,_var(--tw-gradient-stops))] from-indigo-100 via-purple-50 to-pink-100 min-h-screen text-slate-900">
+    
+    <div id="error-display"></div>
+    <div id="root"></div>
+
+    <script>
+        window.onerror = function(message, source, lineno, colno, error) {
+            const el = document.getElementById('error-display');
+            if(el) {
+                el.style.display = 'block';
+                el.innerText = "Lỗi hệ thống: " + message + " (Dòng " + lineno + ")";
+            }
+        };
+    </script>
+
+    <script type="text/babel" data-presets="react">
+        const quizData = {"questions":[{"type":"matching","questionText":"请将下列名词与适当的量词进行匹配。","explanation":"Trong tiếng Trung, mỗi danh từ thường đi kèm với một lượng từ cụ thể: 1. '把' (bǎ) dùng cho các bó hoặc vật có tay cầm (bó rau); 2. '个' (gè) là lượng từ phổ biến nhất, dùng cho người; 3. '张' (zhāng) dùng cho các vật mỏng, phẳng (tờ giấy, bức ảnh); 4. '瓶' (píng) dùng cho đơn vị chai; 5. '位' (wèi) dùng để chỉ người một cách trang trọng, lịch sự (vị khách).","correctAnswer":"1-B, 2-D, 3-A, 4-E, 5-C","audioScript":"","context":"","id":"HSK1_R_M1","options":["A: 张","B: 把","C: 位","D: 个","E: 瓶"],"pairs":[{"left":"一......青菜","right":"B: 把"},{"left":"六......越南人","right":"D: 个"},{"left":"三......照片","right":"A: 张"},{"left":"八......饮料","right":"E: 瓶"},{"left":"七......贵宾","right":"C: 位"}],"score":1},{"type":"matching","questionText":"请将左侧的句子与右侧最合适的词语进行匹配。","explanation":"Giải thích các cặp ghép: 1-E (妹妹去哪里? - Em gái đi đâu?), 2-D (那些衣服 - Những bộ quần áo kia), 3-B (你叫什么名字? - Bạn tên là gì?), 4-A (这是我的书 - Đây là sách của tôi), 5-C (学校很近 - Trường học rất gần).","correctAnswer":"1-E, 2-D, 3-B, 4-A, 5-C","context":"","id":"HSK1_R_M2","pairs":[{"left":"1. 妹妹_____________哪里？","right":"E: 去 (qù)"},{"left":"2. 那 _____________衣服。","right":"D: 些 (xiē)"},{"left":"3. 你___________什么名字？","right":"B: 叫 (jiào)"},{"left":"4. 这_____________我的书。","right":"A: 是 (shì)"},{"left":"5. 学校____________近。","right":"C: 很 (hěn)"}],"score":1},{"id":"HSK1_R_MC1","type":"multiple_choice","questionText":"组句子  Sắp xếp thành câu hoàn chỉnh \nA咖啡    B喝    C他","explanation":"","skill":"Đọc hiểu (Reading)","correctAnswer":"C-B-A","options":["C-B-A","C-A-B","B-A-C","A-B-C"],"score":0.4},{"id":"HSK1_R_MC2","type":"multiple_choice","questionText":"组句子  Sắp xếp thành câu hoàn chỉnh \nA黄     B好     C老师","explanation":"","skill":"Đọc hiểu (Reading)","correctAnswer":"A-C-B","options":["A-C-B","A-B-C","C-A-B","B-A-C"],"score":0.4},{"id":"HSK1_R_MC3","type":"multiple_choice","questionText":"组句子  Sắp xếp thành câu hoàn chỉnh \nB去      C你     A去     D不 ","explanation":"","skill":"Đọc hiểu (Reading)","correctAnswer":"C-A-D-B","options":["C-A-D-B","C-A-B -D","A-B-C-D","C-A-D-CB"],"score":0.4},{"id":"HSK1_R_MC4","type":"multiple_choice","questionText":"组句子  Sắp xếp thành câu hoàn chỉnh\nC水果    A买     B你","explanation":"","skill":"Đọc hiểu (Reading)","correctAnswer":"B-A-C","options":["B-A-C","B-C-A","A-B-C","C-A-B"],"score":0.4},{"id":"HSK1_R_MC5","type":"multiple_choice","questionText":"组句子  Sắp xếp thành câu hoàn chỉnh\nD要        B什么      C她     A吃 ","explanation":"","skill":"Đọc hiểu (Reading)","correctAnswer":"C-D-A-B","options":["C-D-A-B","C-D-B-A","A-B-C-D","B-A-D-C"],"score":0.4},{"type":"matching","questionText":"Ghép cộ A và B","explanation":"Câu hỏi yêu cầu nối các từ vựng tiếng Trung với nghĩa tiếng Việt tương ứng: 1. 是 (shì) nghĩa là 'là', 2. 那 (nà) nghĩa là 'kia', 3. 香蕉 (xiāngjiāo) nghĩa là 'chuối', 4. 便宜 (pián yí) nghĩa là 'rẻ', 5. 钱 (qián) nghĩa là 'tiền'.","correctAnswer":"1-E, 2-A, 3-B, 4-C, 5-D","context":"","id":"HSK1_V_M1","pairs":[{"left":"是 (shì)","right":"là"},{"left":"那 (nà)","right":"kia"},{"left":"香蕉 (xiāngjiāo)","right":"chuối"},{"left":"便宜 (pián yí)","right":"rẻ"},{"left":"钱 (qián)","right":"tiền"}],"score":1},{"type":"matching","questionText":"Ghép cột A và B","explanation":"Câu hỏi yêu cầu ghép các từ vựng tiếng Trung với ý nghĩa tiếng Việt tương ứng: 1. 人 (rén) - người, 2. 想 (xiǎng) - muốn, 3. 吃饭 (chī fàn) - ăn cơm, 4. 星期 (xīng qí) - thứ, 5. 看 (kàn) - xem.","correctAnswer":"1-B, 2-C, 3-E, 4-D, 5-A","audioScript":"","context":"","id":"HSK1_V_M2","options":[],"pairs":[{"left":"人","right":"người"},{"left":"想","right":"muốn"},{"left":"吃饭","right":"ăn cơm"},{"left":"星期","right":"thứ"},{"left":"看","right":"xem"}],"score":1}],"config":{"teacherName":"Cô Hương","language":"Tiếng Trung","programMode":"level","grade":"Lớp 6","unit":"Bài 1: Chào hỏi & Làm quen","proficiencyLevel":"HSK 1","difficulty":"Trung bình","skills":[],"skillConfig":{"Đọc hiểu (Reading)":{"matching":{"selected":true,"count":2,"topic":"1.\t是shì 2.\t那nà  3.\t香蕉xiāngjiāo 4.\t便宜pián yí   5.\t钱qián \tA: kia  B: chuối C: rẻ D: tiền E: là1.\tngười 2.\tmuốn 3.\tăn cơm 4.\tthứ 5.\txem\tA: 看kàn B: 人rén C: 想xiǎng D: 星期xīng qí E: 吃饭chī fàn","score":4,"level":"Nhận biết"},"multiple_choice":{"selected":true,"count":5,"topic":"","score":0.4,"level":"Nhận biết"}},"Từ vựng (Vocabulary)":{"matching":{"selected":true,"count":2,"topic":" 一..................青菜 六..................越南人 三..................照片 八...................饮料 七..................贵宾\tA:张Zhāng B:把bǎ C:位wèi   D:个gè E:瓶píng","score":4,"level":"Nhận biết"}}},"googleScriptUrl":"https://script.google.com/macros/s/AKfycbxfvUsWN6p2zbajzF6ZfWzIjVmZZ2jQNp2jwmw49EA2fgdq3fPpmvMO2PVrWPxm3EMmIQ/exec","timeLimit":0,"githubUsername":"vanc2tayphu-lgtm","githubRepo":"cong-nghe","topic":"","questionCount":0,"skillQuestionMapping":{},"questionTypes":[]},"scoreConfig":{"mc":1,"tf":1,"match":2,"ci":1,"writing":2},"examCode":"B94VRS"};
+        const { questions, config, scoreConfig, examCode } = quizData;
+
+        // --- SOUND FX ---
+        const playSound = (isCorrect) => {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                const now = ctx.currentTime;
+                
+                if (isCorrect) {
+                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + i*0.1);
+                        gain.gain.setValueAtTime(0, now + i*0.1);
+                        gain.gain.linearRampToValueAtTime(0.1, now + i*0.1 + 0.05);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + i*0.1 + 0.5);
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.start(now + i*0.1);
+                        osc.stop(now + i*0.1 + 0.5);
+                    });
+                } else {
+                    [392.00, 369.99, 349.23].forEach((freq, i) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'sawtooth';
+                        osc.frequency.setValueAtTime(freq, now + i*0.2);
+                        gain.gain.setValueAtTime(0, now + i*0.2);
+                        gain.gain.linearRampToValueAtTime(0.05, now + i*0.2 + 0.05);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + i*0.2 + 0.4);
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.start(now + i*0.2);
+                        osc.stop(now + i*0.2 + 0.4);
+                    });
+                }
+            } catch(e) {}
+        };
+
+        const AudioPlayer = ({ text }) => {
+            const [playing, setPlaying] = React.useState(false);
+            const toggle = () => {
+                if(!window.speechSynthesis) return;
+                if(playing) { window.speechSynthesis.cancel(); setPlaying(false); return; }
+                const u = new SpeechSynthesisUtterance(text);
+                const isEnglish = /[a-zA-Z]/.test(text);
+                u.lang = isEnglish ? 'en-US' : 'vi-VN'; 
+                u.rate = 0.9;
+                u.onend = () => setPlaying(false);
+                u.onerror = () => setPlaying(false);
+                window.speechSynthesis.speak(u);
+                setPlaying(true);
+            };
+            return (
+                <div className="flex justify-center my-4">
+                    <button onClick={toggle} className={"flex items-center gap-2 px-6 py-3 rounded-full font-bold shadow-md transition-all " + (playing ? "bg-rose-500 text-white animate-pulse" : "bg-blue-600 text-white hover:bg-blue-500")}>
+                        {playing ? "🔊 Đang đọc..." : "🔊 Nghe đoạn văn"}
+                    </button>
+                </div>
+            );
+        };
+
+        // --- MATCHING GAME COMPONENT (Updated) ---
+        const MatchingGame = ({ question, onAnswer }) => {
+            const [leftSide, setLeftSide] = React.useState([]);
+            const [rightSide, setRightSide] = React.useState([]);
+            const [selectedLeft, setSelectedLeft] = React.useState(null);
+            const [matches, setMatches] = React.useState({}); // { leftId: rightId }
+            const [isSubmitted, setIsSubmitted] = React.useState(false);
+
+            React.useEffect(() => {
+                if(!question.pairs) return;
+                // Init data: left side uses index as ID
+                const l = question.pairs
+                    .map((p,i) => ({id: i, text: p.left, matched: false}))
+                    .filter(x=>x.text && x.text.trim() !== "");
+                
+                // Shuffle right side
+                const r = question.pairs
+                    .map((p,i) => ({id: i, text: p.right, matched: false}))
+                    .filter(x=>x.text && x.text.trim() !== "")
+                    .sort(() => Math.random() - 0.5);
+
+                setLeftSide(l);
+                setRightSide(r);
+                setMatches({});
+                setSelectedLeft(null);
+                setIsSubmitted(false);
+            }, [question]);
+
+            const handleLeft = (id) => {
+                if(isSubmitted || matches[id] !== undefined) return;
+                setSelectedLeft(id === selectedLeft ? null : id); // Toggle selection
+            };
+
+            const handleRight = (rightId) => {
+                if(isSubmitted || selectedLeft === null) return;
+                
+                // Check if right item already matched
+                const isRightMatched = Object.values(matches).includes(rightId);
+                if(isRightMatched) return;
+
+                setMatches(prev => ({...prev, [selectedLeft]: rightId}));
+                setSelectedLeft(null);
+            };
+
+            const handleUndo = (leftId) => {
+                if(isSubmitted) return;
+                const nm = {...matches}; delete nm[leftId]; setMatches(nm);
+            };
+
+            const handleSubmit = () => {
+                if (!question.pairs) return;
+                setIsSubmitted(true);
+                
+                let correctCount = 0;
+                // Check matches: Key (left ID) must equal Value (right ID) because they share original index
+                Object.entries(matches).forEach(([l, r]) => {
+                    if (parseInt(l) === r) correctCount++;
+                });
+
+                const mandatoryPairs = question.pairs.filter(p => p.left.trim() && p.right.trim()).length;
+                const isCorrect = correctCount === mandatoryPairs;
+                onAnswer(isCorrect);
+            };
+
+            const matchedCount = Object.keys(matches).length;
+            const totalItems = Math.min(leftSide.length, rightSide.length);
+            const isComplete = totalItems > 0 && matchedCount >= totalItems;
+
+            return (
+                <div className="w-full">
+                    <div className="flex flex-col md:flex-row justify-between gap-6 mb-8">
+                        {/* LEFT COLUMN */}
+                        <div className="flex-1 space-y-3">
+                            <p className="text-center font-bold text-blue-500 uppercase tracking-wider">Cột A</p>
+                            {leftSide.map(item => {
+                                const isMatched = matches[item.id] !== undefined;
+                                const isSel = selectedLeft === item.id;
+                                
+                                let cls = "border-slate-200 bg-white text-slate-700 hover:border-blue-400";
+                                if(isSel) cls = "border-blue-400 bg-blue-50 ring-2 ring-blue-200 text-blue-900";
+                                if(isMatched) cls = "border-purple-300 bg-purple-50 text-purple-900";
+                                
+                                if(isSubmitted) {
+                                    const matchedRightId = matches[item.id];
+                                    // Correct if leftID == rightID
+                                    if(matchedRightId === item.id) cls = "border-green-400 bg-green-50 text-green-900";
+                                    else cls = "border-red-400 bg-red-50 text-red-900";
+                                }
+
+                                return (
+                                    <div key={item.id} onClick={()=>isMatched ? handleUndo(item.id) : handleLeft(item.id)}
+                                         className={"p-4 rounded-xl border-2 cursor-pointer transition-all flex justify-between items-center shadow-sm " + cls}>
+                                        <span dangerouslySetInnerHTML={{__html: item.text}}></span>
+                                        {isMatched && !isSubmitted && <span className="text-red-400 font-bold px-2 text-xs">✕</span>}
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        {/* RIGHT COLUMN */}
+                        <div className="flex-1 space-y-3">
+                            <p className="text-center font-bold text-blue-500 uppercase tracking-wider">Cột B</p>
+                            {rightSide.map(item => {
+                                // Find which left ID matched this right ID
+                                const matchedLeftId = Object.keys(matches).find(k => matches[k] === item.id);
+                                const isMatched = matchedLeftId !== undefined;
+                                
+                                let cls = "border-slate-200 bg-white text-slate-700 hover:border-blue-400";
+                                if(isMatched) cls = "border-purple-300 bg-purple-50 text-purple-900";
+                                
+                                if(isSubmitted && isMatched) {
+                                    if(parseInt(matchedLeftId) === item.id) cls = "border-green-400 bg-green-50 text-green-900";
+                                    else cls = "border-red-400 bg-red-50 text-red-900";
+                                }
+
+                                return (
+                                    <div key={item.id} onClick={()=>handleRight(item.id)}
+                                         className={"p-4 rounded-xl border-2 cursor-pointer transition-all shadow-sm " + cls}>
+                                        <span dangerouslySetInnerHTML={{__html: item.text}}></span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {!isSubmitted && (
+                        <div className="flex justify-center mt-6">
+                            <button onClick={handleSubmit} disabled={!isComplete}
+                                className={"px-10 py-4 rounded-xl font-bold text-white transition-all text-lg shadow-xl " + (isComplete ? "bg-blue-600 hover:bg-blue-500 hover:scale-[1.02]" : "bg-slate-300 cursor-not-allowed")}>
+                                Chốt đáp án
+                            </button>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        // --- APP SHELL ---
+        const QuizApp = () => {
+            const [view, setView] = React.useState('info');
+            const [student, setStudent] = React.useState({ name: '', class: '' });
+            const [currentIdx, setCurrentIdx] = React.useState(0);
+            const [score, setScore] = React.useState(0);
+            const [selected, setSelected] = React.useState(null);
+            const [isAnswered, setIsAnswered] = React.useState(false);
+            const [feedback, setFeedback] = React.useState(null);
+            const [timeLeft, setTimeLeft] = React.useState((config.timeLimit || 0) * 60);
+            const [answersLog, setAnswersLog] = React.useState([]);
+
+            React.useEffect(() => {
+                if (view === 'game' && config.timeLimit > 0) {
+                    const t = setInterval(() => {
+                        setTimeLeft(p => {
+                            if (p <= 1) { clearInterval(t); finishGame(); return 0; }
+                            return p - 1;
+                        });
+                    }, 1000);
+                    return () => clearInterval(t);
+                }
+            }, [view]);
+
+            const formatTime = (s) => Math.floor(s/60) + ':' + (s%60 < 10 ? '0' : '') + (s%60);
+
+            const startExam = (e) => {
+                e.preventDefault();
+                if(student.name) setView('game');
+            };
+
+            const finishGame = () => {
+                setView('result');
+                if (config.googleScriptUrl) {
+                    const formData = new URLSearchParams();
+                    formData.append('name', student.name);
+                    formData.append('class', student.class);
+                    formData.append('score', score + '/' + questions.reduce((a,b)=>a+(b.score||1),0));
+                    formData.append('examCode', examCode);
+                    formData.append('assessment', 'Nộp từ HTML Offline. Đúng ' + score + ' câu.');
+                    formData.append('answerDetails', JSON.stringify(answersLog));
+                    
+                    fetch(config.googleScriptUrl, {
+                        method: 'POST', mode: 'no-cors', body: formData,
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                    }).catch(console.error);
+                }
+            };
+
+            if (!questions || questions.length === 0) return <div className="p-10 text-center font-bold text-red-500">Lỗi: Không có dữ liệu câu hỏi.</div>;
+
+            const q = questions[currentIdx];
+
+            const handleAnswer = () => {
+                if(!selected && q.type !== 'matching') return;
+                setIsAnswered(true);
+                
+                let correct = false;
+                if(q.type === 'writing') {
+                    const n = (s) => (s||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+                    correct = n(selected) === n(q.correctAnswer);
+                } else {
+                    correct = selected === q.correctAnswer;
+                }
+                processResult(correct);
+            };
+
+            const handleMatchingResult = (correct) => {
+                setIsAnswered(true);
+                processResult(correct);
+            };
+
+            const processResult = (correct) => {
+                playSound(correct);
+                if(correct) {
+                    setScore(s => s + (q.score || 1));
+                    setFeedback({correct: true, text: "Chính xác! Làm tốt lắm."});
+                } else {
+                    let ans = "Xem giải thích";
+                    if(q.type !== 'matching' && q.correctAnswer) ans = q.correctAnswer;
+                    setFeedback({correct: false, text: "Tiếc quá! Đáp án: " + ans});
+                }
+                setAnswersLog(prev => [...prev, { q: currentIdx+1, correct }]);
+            };
+
+            const nextQ = () => {
+                if(currentIdx < questions.length - 1) {
+                    setCurrentIdx(c => c + 1);
+                    setSelected(null);
+                    setIsAnswered(false);
+                    setFeedback(null);
+                } else {
+                    finishGame();
+                }
+            };
+
+            if(view === 'info') return (
+                <div className="min-h-screen flex items-center justify-center p-4">
+                    <div className="bg-white rounded-[2rem] p-10 shadow-2xl max-w-md w-full border-4 border-indigo-300 animate-bounce-slow">
+                        <div className="text-center mb-8">
+                            <h1 className="text-3xl font-black text-indigo-900 mb-2 font-serif uppercase tracking-wider">BÀI THI TRỰC TUYẾN</h1>
+                            <div className="text-slate-500 font-bold text-lg">{config.grade} - {config.unit}</div>
+                            {config.timeLimit > 0 && <div className="mt-2 text-red-500 font-bold bg-red-50 inline-block px-3 py-1 rounded-lg">⏱ {config.timeLimit} phút</div>}
+                        </div>
+                        <form onSubmit={startExam} className="space-y-4">
+                            <input required className="w-full p-4 border-2 border-slate-200 rounded-xl font-bold text-lg focus:border-indigo-500 outline-none" placeholder="Họ và tên..." value={student.name} onChange={e => setStudent({...student, name: e.target.value})} />
+                            <input required className="w-full p-4 border-2 border-slate-200 rounded-xl font-bold text-lg focus:border-indigo-500 outline-none" placeholder="Lớp..." value={student.class} onChange={e => setStudent({...student, class: e.target.value})} />
+                            <button className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-black text-xl shadow-lg hover:scale-[1.02] transition-transform" type="submit">VÀO THI NGAY 🚀</button>
+                        </form>
+                    </div>
+                </div>
+            );
+
+            if(view === 'result') {
+                const max = questions.reduce((a,b)=>a+(b.score||1),0);
+                return (
+                    <div className="min-h-screen flex items-center justify-center p-4">
+                        <div className="bg-white rounded-[3rem] p-12 shadow-2xl text-center border-4 border-yellow-400 animate-bounce-slow max-w-lg w-full">
+                            <h2 className="text-4xl font-black text-slate-900 mb-6 uppercase">KẾT QUẢ</h2>
+                            <div className="bg-yellow-100 p-8 rounded-[2rem] border-2 border-yellow-300 mb-8">
+                                <div className="text-7xl font-black text-yellow-700 mb-2">{score}/{max}</div>
+                                <p className="font-bold text-yellow-800 uppercase tracking-widest">Điểm số</p>
+                            </div>
+                            <button onClick={()=>window.location.reload()} className="px-8 py-3 bg-white border-2 border-slate-300 rounded-xl font-bold text-slate-600 hover:border-indigo-500 hover:text-indigo-600 transition-colors">Làm lại bài</button>
+                        </div>
+                    </div>
+                );
+            }
+
+            const progress = ((currentIdx+1) / questions.length) * 100;
+
+            return (
+                <div className="max-w-4xl mx-auto p-4 md:p-6 min-h-screen flex flex-col justify-center">
+                    <div className="glass-panel rounded-[2.5rem] shadow-2xl p-6 md:p-10 border-4 border-indigo-100 relative overflow-hidden">
+                        
+                        <div className="flex justify-between items-end mb-6 border-b border-slate-200 pb-4 relative z-10">
+                            <div>
+                                <div className="font-bold text-indigo-900 text-xl">{student.name}</div>
+                                <div className="text-sm text-slate-500 font-bold">{student.class}</div>
+                            </div>
+                            {config.timeLimit > 0 && <div className={"text-2xl font-mono font-bold " + (timeLeft<60?"text-red-600 animate-pulse":"text-blue-600")}>{formatTime(timeLeft)}</div>}
+                            <div className="text-right">
+                                <div className="text-3xl font-black text-indigo-600">{score} pts</div>
+                                <div className="text-xs text-slate-400 font-bold uppercase">Câu {currentIdx+1}/{questions.length}</div>
+                            </div>
+                        </div>
+
+                        <div className="w-full bg-slate-200 h-2 rounded-full mb-8 overflow-hidden">
+                            <div className="bg-gradient-to-r from-indigo-400 to-pink-400 h-full transition-all duration-500" style={{width: progress + '%'}}></div>
+                        </div>
+
+                        <div className="relative z-10">
+                            {q.audioScript && <AudioPlayer text={q.audioScript} />}
+                            {q.context && <div className="mb-6 p-6 bg-yellow-50 rounded-xl border-l-4 border-yellow-400 text-slate-700 whitespace-pre-wrap text-lg shadow-inner">{q.context}</div>}
+                            
+                            {q.imageUrl && <div className="flex justify-center mb-6"><img src={q.imageUrl} className="max-h-60 rounded-xl shadow-lg border-2 border-white" /></div>}
+                            
+                            {q.type !== 'matching' && (
+                                <h3 className="text-2xl md:text-3xl font-bold text-slate-800 mb-8 text-center leading-relaxed" dangerouslySetInnerHTML={{__html: q.questionText ? q.questionText.replace(/\n/g, '<br/>') : ''}}></h3>
+                            )}
+
+                            {!isAnswered ? (
+                                <div className="space-y-6">
+                                    {q.type === 'matching' ? (
+                                        <>
+                                            <h3 className="text-xl font-bold text-center mb-6">{q.questionText}</h3>
+                                            <MatchingGame question={q} onAnswer={handleMatchingResult} />
+                                        </>
+                                    ) : q.type === 'writing' ? (
+                                        <div className="space-y-4">
+                                            <input className="w-full p-5 border-2 border-slate-300 rounded-2xl text-xl outline-none focus:border-indigo-500 shadow-sm" placeholder="Nhập câu trả lời..." value={selected||''} onChange={e=>setSelected(e.target.value)} />
+                                            <div className="flex justify-center"><button onClick={handleAnswer} disabled={!selected} className="px-10 py-4 bg-indigo-600 text-white rounded-xl font-bold text-lg shadow-lg hover:bg-indigo-500 disabled:opacity-50">Chốt đáp án</button></div>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                {(q.options || ['True', 'False']).map((opt, i) => (
+                                                    <button key={i} onClick={()=>setSelected(opt)} 
+                                                        className={"p-4 rounded-2xl border-2 text-left font-medium transition-all flex items-center gap-4 group " + (selected===opt ? "border-indigo-500 bg-indigo-50 ring-2 ring-indigo-200" : "border-slate-200 hover:border-indigo-300 bg-white hover:shadow-md")}>
+                                                        <span className={"w-8 h-8 rounded-full flex items-center justify-center font-black text-sm transition-colors " + (selected===opt ? "bg-indigo-500 text-white" : "bg-slate-100 text-slate-500 group-hover:bg-slate-200")}>{String.fromCharCode(65+i)}</span>
+                                                        <span className="text-lg" dangerouslySetInnerHTML={{__html: opt}}></span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                            <div className="mt-8 flex justify-center">
+                                                <button onClick={handleAnswer} disabled={!selected} className="w-full md:w-1/2 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-bold text-lg shadow-xl hover:scale-[1.01] transition-transform disabled:opacity-50 disabled:scale-100">Chốt đáp án</button>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="mt-8 p-8 bg-white/80 rounded-[2rem] border border-slate-200 shadow-xl animate-fade-in">
+                                    <div className={"text-2xl font-black mb-4 flex items-center gap-3 " + (feedback.correct ? "text-green-600" : "text-red-500")}>
+                                        <span className="text-4xl">{feedback.correct ? '🎉' : '🤔'}</span> {feedback.text}
+                                    </div>
+                                    <div className="text-slate-700 text-lg mb-8 p-4 bg-slate-50 rounded-xl"><span className="font-bold text-indigo-600 uppercase text-xs block mb-1">Giải thích chi tiết</span> {q.explanation}</div>
+                                    <div className="flex justify-end">
+                                        <button onClick={nextQ} className="px-8 py-3 bg-teal-500 text-white rounded-xl font-bold text-lg shadow-lg hover:bg-teal-400 transition-colors">{currentIdx < questions.length - 1 ? "Câu tiếp theo ➜" : "Xem kết quả"}</button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<QuizApp />);
+    </script>
+</body>
+</html>
