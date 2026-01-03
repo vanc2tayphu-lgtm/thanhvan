@@ -14,5 +14,13 @@
     "role": "student",
     "createdDate": "2026-01-03T04:19:02.932Z",
     "scriptUrl": ""
+  },
+  {
+    "username": "VÂN",
+    "password": "123456",
+    "fullName": "Nguyển thị thanh vân",
+    "role": "teacher",
+    "createdDate": "2026-01-03T04:36:01.943Z",
+    "scriptUrl": ""
   }
 ]
