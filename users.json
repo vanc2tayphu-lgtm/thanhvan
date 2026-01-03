@@ -70,5 +70,13 @@
     "role": "student",
     "createdDate": "2026-01-03T07:22:16.482Z",
     "scriptUrl": ""
+  },
+  {
+    "username": "phanhuy09",
+    "password": "123456123456",
+    "fullName": "Phan Huy",
+    "role": "teacher",
+    "createdDate": "2026-01-03T07:32:57.668Z",
+    "scriptUrl": ""
   }
 ]
