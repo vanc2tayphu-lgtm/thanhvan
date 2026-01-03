@@ -54,5 +54,13 @@
     "role": "student",
     "createdDate": "2026-01-03T07:00:46.965Z",
     "scriptUrl": ""
+  },
+  {
+    "username": "DUNG",
+    "password": "123456",
+    "fullName": "ĐẶNG LÊ PHƯƠNG DUNG",
+    "role": "student",
+    "createdDate": "2026-01-03T07:14:34.284Z",
+    "scriptUrl": ""
   }
 ]
