@@ -78,5 +78,13 @@
     "role": "teacher",
     "createdDate": "2026-01-03T07:32:57.668Z",
     "scriptUrl": ""
+  },
+  {
+    "username": "Bảo Anh",
+    "password": "123456",
+    "fullName": "Nguyễn Bảo Anh",
+    "role": "student",
+    "createdDate": "2026-01-03T07:55:08.910Z",
+    "scriptUrl": ""
   }
 ]
