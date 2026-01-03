@@ -86,5 +86,13 @@
     "role": "student",
     "createdDate": "2026-01-03T07:55:08.910Z",
     "scriptUrl": ""
+  },
+  {
+    "username": "nguyễn anh nguyên",
+    "password": "123456",
+    "fullName": "Nguyễn Anh Nguyên",
+    "role": "student",
+    "createdDate": "2026-01-03T12:57:56.107Z",
+    "scriptUrl": ""
   }
 ]
