@@ -38,5 +38,13 @@
     "role": "student",
     "createdDate": "2026-01-03T05:22:42.341Z",
     "scriptUrl": ""
+  },
+  {
+    "username": "dung123",
+    "password": "12345",
+    "fullName": "Nguyễn Anh Dũng",
+    "role": "teacher",
+    "createdDate": "2026-01-03T05:23:16.797Z",
+    "scriptUrl": ""
   }
 ]
