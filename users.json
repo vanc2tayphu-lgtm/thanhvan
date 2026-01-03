@@ -6,5 +6,13 @@
     "role": "teacher",
     "createdDate": "2026-01-03T04:11:38.785Z",
     "scriptUrl": "AIzaSyAmDp0pAjQlqDEzuHserHap8QL4AfdaTqg"
+  },
+  {
+    "username": "TÁM",
+    "password": "123456",
+    "fullName": "NGUYỄN THỊ BÉ TÁM",
+    "role": "student",
+    "createdDate": "2026-01-03T04:19:02.932Z",
+    "scriptUrl": ""
   }
 ]
