@@ -158,5 +158,13 @@
     "role": "teacher",
     "createdDate": "2026-01-04T00:05:09.688Z",
     "scriptUrl": ""
+  },
+  {
+    "username": "my",
+    "password": "123456",
+    "fullName": "ĐÀO NGỌC TRÀ MY ",
+    "role": "student",
+    "createdDate": "2026-01-04T02:25:40.895Z",
+    "scriptUrl": ""
   }
 ]
