@@ -230,5 +230,13 @@
     "role": "student",
     "createdDate": "2026-01-04T12:04:38.573Z",
     "scriptUrl": ""
+  },
+  {
+    "username": "thanhtrinh",
+    "password": "thanh",
+    "fullName": "Trinh Thanh",
+    "role": "teacher",
+    "createdDate": "2026-01-04T12:30:19.155Z",
+    "scriptUrl": ""
   }
 ]
